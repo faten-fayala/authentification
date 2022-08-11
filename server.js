@@ -1,0 +1,13 @@
+const express=require('express')
+const config=require('config')
+const dbConnect=require('./helpers/dbConnect')
+const cors=require('cors')
+dbConnect()
+const app=express()
+app.use(cors())
+app.use(express.json())
+app.use('/api/user',require('./Routes/userRoute'))
+const PORT=5000 || config.get('SERVER_CONFIG.PORT')
+app.listen(PORT,(err)=>{
+    err ? console.log(err) : console.log('server is running')
+})
